@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/vue.js"></script>
+	<style>
+		.divider{
+			height: 1px;
+			width: 100%;
+			list-style: none;
+			background: yellow;
+		}
+	</style>
+</head>
+<body>
+  <div id="app">
+  	<ul>
+  <template v-for="item in items">
+    <li>{{ item.msg }}</li>
+    <li class="divider"></li>
+  </template>
+   <span v-for="n in 10">{{ n }} </span>
+</ul>
+  </div>
+</body>
+</html>
+<script>
+	var app=new Vue({
+		el:"#app",
+		data:{
+			items:[
+			{
+			 msg:'hello',
+			},
+			{
+			 msg:'hello',
+			},
+			{
+			 msg:'hello',
+			}
+			]
+		}
+	})
+</script>

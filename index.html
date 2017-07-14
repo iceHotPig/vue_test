@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/vue.js"></script>
+	<style>
+		/*#box{
+			height: 100px;
+			width: 100px;
+			background: red;
+		}*/
+		.active{
+			height: 100px;
+			width: 100px;
+			background: yellow;
+		}
+	</style>
+</head>
+<body>
+  <div id="app">
+    <p v-bind:title="a">{{a}}</p>	
+		<input type="text"  v-model='a'>
+		<div id="box" v-if='see'></div>
+		<div id="box" v-if='a'></div>
+		<button v-on:click='toggle'>click</button>
+  </div>
+  <hr>
+  <br>
+  <div id="app_1">
+  	<input type="text" v-model="b">
+  	<button v-on:click='add'>click</button>
+  	<ul>
+  	  <items-com v-for="(item,index) in items" v-bind:item="item" v-bind:id="index"></items-com>
+  	</ul>
+  	<ol>
+  	  <items-com v-for="(item,index) in items" v-bind:item="item" v-bind:id="index"></items-com>
+  	</ol>
+  </div>
+  <hr>
+  <br>
+  <div id="app_2">
+  	<input type="text" v-model="isactive">
+  	<div id="box" v-if="isactive >5 ? true : false" v-bind:class="{active:isactive}"></div>
+  </div>
+  <hr>
+  <br>
+  <div id="app_3">
+    <button v-on:click='msge'>点击</button>
+  	<input type="text" v-model="message">
+  	<div>{{message}}</div>
+  	<div>反转后:{{message}}</div>
+  </div>
+</body>
+</html>
+<script>
+ var app=new Vue({
+  	el:'#app',
+  	data:{
+     a:1,
+     see:true
+  	},
+  	methods:{
+  		toggle:function(){
+  			this.see=!this.see;
+  		}
+  	}
+ })
+</script>
+<script>
+  Vue.component('items-com',{
+  	props:['item'],
+  	template:'<li><span>{{id}}</span>{{item}}</li>'
+  })
+	var app=new Vue({
+		el:'#app_1',
+		data:{
+		  b:null,
+			items: [
+			 	'A','B','C','D'
+			]		
+		}, 
+		methods:{
+			add:function(){
+			  this.items.push(this.b)
+			}
+		}
+	})
+</script>
+<script>
+	var app=new Vue({
+		el:"#app_2",
+		data:{
+			isactive:0,
+		},
+	})
+</script>
+<script>
+	var app=new Vue({
+		el:'#app_3',
+		data:{
+			message:"thank you for you help"
+		},
+		methods:{
+			msge:function(){
+	     this.message=this.message.split('').reverse().join(' ');
+	    }
+		},
+		// computed:{
+		// msge:function(){
+		// 	return this.message.split(' ').reverse().join(' ');
+		// }
+	})
+</script>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+    <button v-on:click='change'>change</button>
+		<template v-if="type=='password'">
+			<label for="">name：</label>
+			<input type="text" key="password-input">
+		</template>
+		<template v-else>
+			<label for="">email:</label>
+			<input type="text" key="code-input">
+		</template>
+	</div>
+	<div id="example">
+	  <button v-on:click="counter += 1">增加 1</button>
+	  <p>这个按钮被点击了 {{ counter }} 次。</p>
+	</div>
+</body>
+</html>
+<script>
+	var app=new Vue({
+		el:'#app',
+		data:{
+      type:'password'
+		},
+		methods:{
+	    change:function(){
+	     this.type=this.type=='code'?'password':'code';
+			}
+	  }
+	})
+	var example1 = new Vue({
+  el: '#example',
+  data: {
+    counter: 0
+  }
+})
+</script>

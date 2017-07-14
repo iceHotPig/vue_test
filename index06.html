@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	  html,body{
+	  	width: 100%,
+	  }
+	  ul{
+	  	width: 1200px;
+	  	margin: 0 auto;
+	  	border: 1px solid red;
+	  	padding: 0;
+	  }
+	  ul li{
+      height: 200px;
+      width: 130px;
+	  }
+	  ul li img{
+	  	height: 100%;
+	  	width: 100%;
+	  }
+	</style>
+	<script src="./js/vue.js"></script>
+	<script src="./js/_vue.js"></script>
+	<script src="./js/jquery.js"></script>
+</head>
+<body>
+	<div id="app">
+	  <input type="text" v-model='inp'>
+		<button v-on:click='add'>click</button>
+		<audio v-bind:src="songSource" controls></audio>
+		<div class="lyric" >
+			
+		</div>
+		<ul v-if="song">
+			<li v-for='item in song.songs'>
+				<img v-bind:src="item.al.picUrl" alt="" @click='playsong(item.id)'>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>
+<script>
+	var app=new Vue({
+		el:"#app",
+		data:{
+			inp:'fade',
+			song: null,
+			songSource: null,
+			lyric:null,
+		},
+		methods:{
+			add:function(){
+				// var _this=this;
+				this.$http.get('https://api.imjad.cn/cloudmusic/?type=search&limit=13&s='+this.inp).then(response=>{
+					this.song=response.body.result;
+				},error=>{
+					alert(error);
+				})
+				// $.ajax({
+				// 	type:'get',
+				// 	url:'https://api.imjad.cn/cloudmusic/?type=search&limit=13&s='+this.inp,
+				// 	async:true,
+				// 	success:function(data){
+    //       	_this.song=data.result;
+				// 	}
+				// })
+			},
+			playsong:function(id){
+				this.$http.get('https://api.imjad.cn/cloudmusic/?type=song&br=128000&id='+id,).then(response=>{
+					this.songSource=response.body.data[0].url
+				},error=>{
+					alert(error);
+				})
+				// var _this = this;
+				// 	$.ajax({
+		   //      type: 'get',
+		   //      url:'https://api.imjad.cn/cloudmusic/?type=song&br=128000&id='+id,
+		   //      async: true,
+		   //      success: function(data) {
+		   //        _this.songSource = data.data[0].url
+		   //      }
+		   //    })
+			}
+		}
+	})
+</script>

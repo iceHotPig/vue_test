@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<ul>
+			<li v-for='(item, index) in items'>{{p}}-{{index+1}}-{{item.phone}}</li>
+		</ul>
+	</div>
+</body>
+</html>
+<script>
+	var app=new Vue({
+		el:'#app',
+		data:{
+			p:'phone',
+			items:[
+			{
+				phone:'iphone',
+				n:1
+			},
+			{
+				phone:'xiaomi',
+				n:2
+			},
+			{
+				phone:'huawei',
+				n:3
+			},
+			{
+				phone:'meizu',
+				n:4
+			}
+			]
+		}
+	})
+</script>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+ <div id="app">
+		<input type="text" v-model="elm">
+		<button v-on:click='add'>add</button>
+		<ul>
+			<li v-for='(item,index) in items'>{{item}}<a href="###" v-on:click.prevent='del(index)'> delete</a></li>
+		</ul>
+ </div>
+</body>
+</html>
+<script>
+	var app=new Vue({
+		el:"#app",
+		data:{
+			elm:"",
+			items:[
+			 'a',
+			 'b',
+			 'c',
+			 'd',
+			]
+		},
+		methods:{
+			add:function(){
+			this.items.push(this.elm)
+		},
+		del:function(item){
+      this.items.splice(item,1)
+		}
+		}
+	})
+</script>
